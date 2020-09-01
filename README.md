@@ -1,3 +1,3 @@
-# YouTube Clone
+# WeTube
 
-First fullstack web development
+YouTube Clone
