@@ -9,8 +9,10 @@ html
         integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc", 
         crossorigin="anonymous"
         )
+    link(rel="stylesheet", href="/dist/main.css")
   body
     include ../partials/header
     main
       block content
     include ../partials/footer
+    script(src="/dist/main.js")
