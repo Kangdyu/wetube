@@ -1,0 +1,10 @@
+.video-block {
+  // display: grid;
+  // grid-template-rows: 10fr 2fr;
+  .video-block__thumbnail {
+    width: 100%;
+    video {
+      width: 100%;
+    }
+  }
+}

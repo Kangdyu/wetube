@@ -4,7 +4,7 @@
   "description": "YouTube Clone",
   "main": "index.js",
   "scripts": {
-    "dev:server": "nodemon --exec babel-node init.js --delay 1",
+    "dev:server": "nodemon --exec babel-node init.js --delay 1 --ignore '*.scss'",
     "dev:assets": "NODE_ENV=development webpack -w",
     "build:assets": "NODE_ENV=production webpack"
   },
@@ -48,7 +48,10 @@
     "prettier": "^2.1.1",
     "sass-loader": "^10.0.1",
     "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
   },
-  "browserslist": ["defaults"]
+  "browserslist": [
+    "defaults"
+  ]
 }

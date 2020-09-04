@@ -1,5 +1,23 @@
-@import "./config/_variables";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;900&display=swap');
+@import "./config/_variables.scss";
+@import "./config/reset.scss";
+@import "main.scss";
+
+@import "./partials/header.scss";
+@import "./partials/footer.scss";
+@import "./partials/signForm.scss";
+@import "./partials/videoBlock.scss";
+
+@import "./pages/home.scss";
+
+html {
+  font-size: 14px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
 
 body {
-  background: $bgColor;
+  background: $white;
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr 10vh;
 }
