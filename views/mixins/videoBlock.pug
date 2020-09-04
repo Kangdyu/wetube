@@ -1,8 +1,7 @@
 mixin videoBlock(video = {})
-  .video-block
-    a(href=routes.videoDetail(video.id))
-      .video-block__thumbnail
-        video(src=video.fileUrl)
-      .video-block__info
-        h4.video-block__title= video.title
-        h6.video-block__views= video.views
+  a.video-block(href=routes.videoDetail(video.id))
+    .video-block__thumbnail
+      video(src=video.fileUrl)
+    .video-block__info
+      h4.video-block__title= video.title
+      h6.video-block__views 조회수 #{video.views}

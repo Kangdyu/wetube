@@ -11,8 +11,14 @@
     align-items: center;
     font-size: 1.2rem;
 
+    .form__title {
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 50px;
+    }
+
     input {
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+      box-shadow: $boxShadow;
       &:not([type="submit"]) {
         outline: none;
         border: none;
@@ -35,36 +41,18 @@
         margin: 20px;
       }
     }
-  }
-}
 
-.social-login {
-  display: flex;
-  flex-direction: column;
-  padding: 20px 0;
-
-  button {
-    outline: none;
-    border: none;
-    padding: 10px 20px;
-    width: 300px;
-    height: 50px;
-    border-radius: 50px;
-    font-size: 1.2rem;
-    color: white;
-    background-color: $mainColor;
-    margin-bottom: 10px;
-
-    &:last-child {
-      margin-bottom: 0;
+    textarea {
+      box-shadow: $boxShadow;
+      font-family: inherit;
+      font-size: 1.1rem;
+      width: 30vw;
+      height: 30vh;
+      border-radius: 20px;
+      outline: none;
+      border: none;
+      padding: 10px;
+      resize: none;
     }
-  }
-
-  .social-login--github {
-    background-color: rgb(36, 41, 46);
-  }
-
-  .social-login--facebook {
-    background-color: rgb(24, 119, 242);
   }
 }

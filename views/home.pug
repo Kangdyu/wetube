@@ -2,7 +2,6 @@ extends layouts/main
 include mixins/videoBlock
 
 block content
-  .video__container
-    .videos
-      each video in videos
-        +videoBlock(video)
+  .videos
+    each video in videos
+      +videoBlock(video)

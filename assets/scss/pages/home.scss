@@ -1,13 +1,5 @@
-.video__container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-
-  .videos {
-    max-width: $containerWidth;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(300px, 16fr));
-    grid-auto-rows: minmax(225px, auto);
-    gap: 20px;
-  }
+.videos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
 }
