@@ -36,11 +36,56 @@ export const postLogin = passport.authenticate("local", {
   successRedirect: routes.home,
 });
 
-export const logout = (req, res) => {
-  // TODO: Process Log Out
+export const githubLogin = passport.authenticate("github");
+export const githubLoginCallback = async (_, __, profile, cb) => {
+  const {
+    _json: { id, avatar_url, name, email },
+  } = profile;
+
+  try {
+    const user = await User.findOne({ email });
+    if (user) {
+      user.githubId = id;
+      user.avatarUrl = avatar_url;
+      user.name = name;
+      user.save();
+      return cb(null, user);
+    }
+    const newUser = await User.create({
+      email,
+      name,
+      githubId: id,
+      avatarUrl: avatar_url,
+    });
+    return cb(null, newUser);
+  } catch (error) {
+    return cb(error);
+  }
+};
+export const postGithubLogin = (req, res) => {
   res.redirect(routes.home);
 };
 
-export const userDetail = (req, res) => res.render("userDetail");
+export const logout = (req, res) => {
+  req.logout();
+  res.redirect(routes.home);
+};
+
+export const getMe = (req, res) => {
+  console.log(req.user);
+  res.render("userDetail", { pageTitle: "User Detail", user: req.user });
+};
+export const userDetail = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+
+  try {
+    const user = await User.findById(id);
+    res.render("userDetail", { pageTitle: "User Detail", user });
+  } catch (error) {
+    res.redirect(routes.home);
+  }
+};
 export const editProfile = (req, res) => res.render("editProfile");
 export const changePassword = (req, res) => res.render("changePassword");
