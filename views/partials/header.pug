@@ -7,7 +7,7 @@ header.header
       form(action=routes.search, method="get")
         input(type="text", placeholder="Search by term...", name="term")
     .header__column
-      if user.isAuthenticated
+      if user
           a(href=`/videos${routes.upload}`) Upload
           a(href=routes.userDetail(user.id)) Profile
           a(href=routes.logout) Log Out
