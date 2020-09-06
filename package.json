@@ -4,7 +4,7 @@
   "description": "YouTube Clone",
   "main": "index.js",
   "scripts": {
-    "dev:server": "nodemon --exec babel-node init.js --delay 1 --ignore '*.scss'",
+    "dev:server": "nodemon --exec babel-node init.js --delay 1 --ignore 'dist/'",
     "dev:assets": "NODE_ENV=development webpack -w",
     "build:assets": "NODE_ENV=production webpack"
   },

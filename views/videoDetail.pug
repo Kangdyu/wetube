@@ -7,7 +7,10 @@ block content
     .video__info
       .title__container
         h5.video__title=video.title
-        a.video-edit__button(href=routes.editVideo(video.id)) Edit video
+        if loggedUser && video.creator.id === loggedUser.id
+          a.video-edit__button(href=routes.editVideo(video.id)) Edit video
+      .video__author
+        a(href=routes.userDetail(video.creator.id))=video.creator.name
       span.video__views 조회수 #{video.views}
       p.video__description=video.description
     .video__comments
