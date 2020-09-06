@@ -1,4 +1,5 @@
 import "../scss/styles.scss";
+import "./videoPlayer";
 
 window.addEventListener("load", () => {
   const videos = document.querySelectorAll(".video-block video");
