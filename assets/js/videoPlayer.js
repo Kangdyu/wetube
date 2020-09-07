@@ -1,11 +1,16 @@
 const videoContainer = document.querySelector("#jsVideoPlayer");
-const videoPlayer = videoContainer.querySelector("video");
+const videoPlayer = document.querySelector("#jsVideoPlayer video");
 const playButton = document.querySelector("#jsPlayButton");
 const volumeButton = document.querySelector("#jsVolumeButton");
 const fullScreenButton = document.querySelector("#jsFullScreenButton");
 const currentTime = document.querySelector("#jsCurrentTime");
 const totalTime = document.querySelector("#jsTotalTime");
 const volumeRange = document.querySelector("#jsVolumeBar");
+
+const registerView = () => {
+  const id = window.location.href.split("/videos/")[1];
+  fetch(`/api/${id}/view`, { method: "POST" });
+};
 
 function playHandler() {
   if (videoPlayer.paused) {
@@ -90,6 +95,7 @@ function setTotalTime() {
 function videoEndHandler() {
   videoPlayer.currentTime = 0;
   playButton.innerHTML = "<i class='fas fa-play'></i>";
+  registerView();
 }
 
 function init() {

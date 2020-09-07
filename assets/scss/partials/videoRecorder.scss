@@ -1,0 +1,19 @@
+.record-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  video {
+    background-color: $black;
+  }
+
+  button {
+    width: 150px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: $highlightColor;
+    font-size: 1.2rem;
+    color: white;
+    margin: 20px;
+  }
+}
