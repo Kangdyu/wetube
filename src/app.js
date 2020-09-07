@@ -1,3 +1,4 @@
+import "@babel/polyfill";
 import express from "express";
 import morgan from "morgan";
 import helmet from "helmet";
@@ -5,6 +6,7 @@ import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import passport from "passport";
 import session from "express-session";
+import path from "path";
 import mongoose from "mongoose";
 import MongoStore from "connect-mongo";
 import { localsMiddleware } from "./middlewares";
@@ -20,10 +22,10 @@ const app = express();
 const CookieStore = MongoStore(session);
 
 app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "views"));
 
 app.use(helmet({ contentSecurityPolicy: false }));
-app.use("/uploads", express.static("uploads"));
-app.use("/dist", express.static("dist"));
+app.use("/dist", express.static(path.join(__dirname, "dist")));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

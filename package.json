@@ -4,9 +4,14 @@
   "description": "YouTube Clone",
   "main": "index.js",
   "scripts": {
-    "dev:server": "nodemon --exec babel-node init.js --delay 1 --ignore 'dist/'",
-    "dev:assets": "NODE_ENV=development webpack -w",
-    "build:assets": "NODE_ENV=production webpack"
+    "dev:server": "nodemon --exec babel src/init.js --delay 1 --ignore 'dist/'",
+    "dev:assets": "cd src && NODE_ENV=development webpack -w",
+    "build:assets": "cd src && NODE_ENV=production webpack",
+    "build:server": "babel src --out-dir build --ignore 'src/assets','src/dist','src/webpack.config.js'",
+    "copyAll": "cp -R src/dist build && cp -R src/views build",
+    "build": "npm run build:server && npm run build:assets && npm run copyAll",
+    "prebuild": "rm -rf build",
+    "start": "node build/init.js"
   },
   "repository": {
     "type": "git",
@@ -42,6 +47,7 @@
     "pug": "^3.0.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.11.6",
     "@babel/core": "^7.11.5",
     "@babel/node": "^7.10.5",
     "@babel/preset-env": "^7.11.5",
