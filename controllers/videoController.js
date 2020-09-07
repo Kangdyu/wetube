@@ -111,11 +111,7 @@ export const deleteVideo = async (req, res) => {
 
 export const postRegisterView = async (req, res) => {
   const {
-<<<<<<< HEAD
     params: { id },
-=======
-    params: { id }
->>>>>>> 4b291f08dd8aa3e4ef93bb44952a335b2a26bd27
   } = req;
 
   try {
@@ -128,7 +124,6 @@ export const postRegisterView = async (req, res) => {
   } finally {
     res.end();
   }
-<<<<<<< HEAD
 };
 
 export const postAddComment = async (req, res) => {
@@ -152,6 +147,3 @@ export const postAddComment = async (req, res) => {
     res.end();
   }
 };
-=======
-}
->>>>>>> 4b291f08dd8aa3e4ef93bb44952a335b2a26bd27
