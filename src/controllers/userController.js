@@ -43,7 +43,7 @@ export const githubLoginCallback = async (_, __, profile, cb) => {
   } = profile;
 
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).populate("videos");
     if (user) {
       user.githubId = id;
       user.avatarUrl = avatar_url;
@@ -101,9 +101,13 @@ export const logout = (req, res) => {
   res.redirect(routes.home);
 };
 
-export const getMe = (req, res) => {
-  console.log(req.user);
-  res.render("userDetail", { pageTitle: "User Detail", user: req.user });
+export const getMe = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).populate("videos");
+    res.render("userDetail", { pageTitle: "User Detail", user });
+  } catch (error) {
+    res.redirect(routes.home);
+  }
 };
 export const userDetail = async (req, res) => {
   const {
@@ -112,7 +116,6 @@ export const userDetail = async (req, res) => {
 
   try {
     const user = await User.findById(id).populate("videos");
-    console.log(user);
     res.render("userDetail", { pageTitle: "User Detail", user });
   } catch (error) {
     res.redirect(routes.home);
