@@ -1,6 +1,12 @@
-.user-avatar {
+.user-avatar--big {
   width: 150px;
   height: 150px;
+  border-radius: 50%;
+}
+
+.user-avatar--medium {
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
 }
 

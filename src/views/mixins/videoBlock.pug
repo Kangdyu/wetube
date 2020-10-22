@@ -1,13 +1,19 @@
-mixin videoBlock(video = {})
+mixin videoBlock(video = {}, isUserDetail = false)
   .video-block
     a.video-block__thumbnail(href=routes.videoDetail(video.id))
       video(src=video.fileUrl)
     .video-block__info
-      a.video-block__creatorAvatar(href=routes.userDetail(video.creator.id))
-        img.user-avatar--small(src=video.creator.avatarUrl)
-      .video-block__detail
-        a(href=routes.videoDetail(video.id))
-          h4.video-block__title= video.title
-        a(href=routes.userDetail(video.creator.id))
-          h5.video-block__creator= video.creator.name
-        h6.video-block__views 조회수 #{video.views}
+      if isUserDetail
+        .video-block__detail
+          a(href=routes.videoDetail(video.id))
+            h4.video-block__title= video.title
+          h6.video-block__views 조회수 #{video.views}
+      else
+        a.video-block__creatorAvatar(href=routes.userDetail(video.creator.id))
+          img.user-avatar--small(src=video.creator.avatarUrl)
+        .video-block__detail
+          a(href=routes.videoDetail(video.id))
+            h4.video-block__title= video.title
+          a(href=routes.userDetail(video.creator.id))
+            h5.video-block__creator= video.creator.name
+          h6.video-block__views 조회수 #{video.views}

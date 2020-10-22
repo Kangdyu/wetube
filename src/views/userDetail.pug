@@ -4,7 +4,7 @@ include mixins/videoBlock
 block content
   .user-profile
     .user-profile__header
-      img.user-avatar(src=user.avatarUrl)
+      img.user-avatar--big(src=user.avatarUrl)
       h4.user-name=user.name
     if loggedUser && user.id === loggedUser.id
       .user-profile__btns
@@ -14,4 +14,4 @@ block content
           button Change Password
   .videos
     each video in user.videos
-      +videoBlock(video)
+      +videoBlock(video, true)

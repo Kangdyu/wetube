@@ -38,21 +38,27 @@
       }
     }
 
-    .video__views {
-      font-size: 1.2rem;
-      font-weight: 200;
+    .video__views,
+    .video__created-at {
+      color: #777;
     }
 
-    .video__author {
+    .video__creator {
+      display: flex;
+      align-items: center;
       font-size: 1.2rem;
       font-weight: 900;
       color: $highlightColor;
       margin-bottom: 20px;
+
+      a:first-child {
+        margin-right: 10px;
+      }
     }
 
     .video__description {
       line-height: 1.5;
-      text-indent: 20px;
+      text-indent: 50px;
     }
   }
 
@@ -65,18 +71,36 @@
     }
 
     .add-comment {
+      display: flex;
+      align-items: center;
       margin: 20px 0;
       width: 100%;
       input {
         width: 50%;
         padding: 10px;
         border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        background: transparent;
       }
     }
 
     .video__comments-list {
       li {
+        display: flex;
+        align-items: center;
         padding: 20px 0;
+
+        .comment__user-avatar {
+          margin-right: 10px;
+        }
+
+        .comment {
+          display: flex;
+          flex-direction: column;
+
+          .comment-author {
+            margin-bottom: 10px;
+          }
+        }
       }
     }
   }

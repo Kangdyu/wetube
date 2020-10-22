@@ -2,6 +2,7 @@ import routes from "../routes";
 import Video from "../models/Video";
 import Comment from "../models/Comment";
 import { s3 } from "../middlewares";
+import { format, formatDistance, subDays } from "date-fns";
 
 export const home = async (req, res) => {
   try {
@@ -57,9 +58,16 @@ export const videoDetail = async (req, res) => {
   try {
     const video = await Video.findById(id)
       .populate("creator")
-      .populate("comments");
-    console.log(video);
-    res.render("videoDetail", { pageTitle: video.title, video });
+      .populate({ path: "comments", populate: { path: "creator" } });
+    const now = new Date();
+    const dateCalc = subDays(now, video.createdAt);
+    let createdAt;
+    if (dateCalc < 7) {
+      createdAt = formatDistance(video.createdAt, new Date());
+    } else {
+      createdAt = format(video.createdAt, "yyyy. MM. dd.");
+    }
+    res.render("videoDetail", { pageTitle: video.title, video, createdAt });
   } catch (error) {
     console.log(error);
     res.redirect(routes.home);
@@ -158,6 +166,6 @@ export const postAddComment = async (req, res) => {
   } catch (error) {
     res.status(400);
   } finally {
-    res.end();
+    res.json(user);
   }
 };

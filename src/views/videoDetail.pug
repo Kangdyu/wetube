@@ -12,24 +12,31 @@ block content
           h5.video__title=video.title
           if loggedUser && video.creator.id === loggedUser.id
             a.video-edit__button(href=routes.editVideo(video.id)) Edit video
-        span.video__views 조회수 #{video.views}
+        span.video__views 조회수 #{video.views} • 
+        span.video__created-at= createdAt
       .info__section
-        .video__author
+        .video__creator
+          a(href=routes.userDetail(video.creator.id))
+            img.user-avatar--small(src=video.creator.avatarUrl)
           a(href=routes.userDetail(video.creator.id))=video.creator.name
         p.video__description=video.description
     
     .video__comments
-      if video.comments.length === 1
-        span.video__comment-number
-          span#jsCommentNumber 1
-          |  comment
-      else
-        span.video__comment-number
-          span#jsCommentNumber #{video.comments.length}
-          |  comments
+      span.video__comment-number
+        |댓글 
+        span#jsCommentNumber #{video.comments.length}
+        | 개
       form.add-comment#jsAddComment
-        input(type="text", placeholder="Add a comment")
+        if loggedUser
+          img.user-avatar--small(src=loggedUser.avatarUrl)
+          input(type="text", placeholder="댓글을 입력하세요.")
+        else
+          input(type="text", value="댓글을 남기려면 로그인이 필요합니다.", disabled)
       ul.video__comments-list#jsCommentList
         each comment in video.comments.reverse()
           li
-            span=comment.text
+            a.comment__user-avatar(href=routes.userDetail(comment.creator.id))
+              img.user-avatar--small(src=comment.creator.avatarUrl)
+            .comment
+              a.comment-author(href=routes.userDetail(comment.creator.id))=comment.creator.name
+              span.comment-text=comment.text
