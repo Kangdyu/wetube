@@ -4,20 +4,41 @@
 
   .video-block__thumbnail {
     background-color: $black;
+    margin-bottom: 15px;
     video {
       width: 100%;
     }
   }
 
   .video-block__info {
-    padding-top: 10px;
+    display: flex;
+
+    .video-block__creatorAvatar {
+      margin-right: 10px;
+    }
+
     .video-block__title {
       font-size: 1.3rem;
-      font-weight: 900;
-      padding: 5px 0;
+      font-weight: 500;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      margin-bottom: 5px;
     }
+
+    .video-block__creator,
     .video-block__views {
-      padding: 5px 0
+      color: #777;
+    }
+
+    .video-block__creator {
+      &:hover {
+        color: #111;
+      }
+    }
+
+    .video-block__views {
+      padding: 5px 0;
     }
   }
 }
