@@ -3,9 +3,9 @@ include mixins/videoBlock
 
 block content
   .search__header
-    h3 Searching by #{searchingBy}
-  .search__videos
+    h3 검색 결과: #{searchingBy}
+  .search__videos.videos
     if videos.length === 0
-      h5 No Videos Found
-    each video in videos
+      h5 검색 결과 없음
+    each video in videos.reverse()
         +videoBlock(video)

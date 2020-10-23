@@ -22,7 +22,7 @@ export const search = async (req, res) => {
   try {
     videos = await Video.find({
       title: { $regex: searchingBy, $options: "i" },
-    });
+    }).populate("creator");
   } catch (error) {
     console.log(error);
   }
