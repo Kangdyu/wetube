@@ -102,15 +102,18 @@ function videoEndHandler() {
 }
 
 function init() {
-  videoPlayer.volume = 0.5;
-
-  playButton.addEventListener("click", playHandler);
-  volumeButton.addEventListener("click", muteHandler);
-  fullScreenButton.addEventListener("click", doFullScreen);
-  videoPlayer.addEventListener("loadeddata", setTotalTime);
+  if (videoPlayer.readyState >= 2) {
+    setTotalTime();
+  } else {
+    videoPlayer.addEventListener("loadeddata", setTotalTime);
+  }
   videoPlayer.addEventListener("timeupdate", setCurrentTime);
   videoPlayer.addEventListener("ended", videoEndHandler);
+  playButton.addEventListener("click", playHandler);
   volumeRange.addEventListener("input", volumeHandler);
+  volumeButton.addEventListener("click", muteHandler);
+  fullScreenButton.addEventListener("click", doFullScreen);
+  videoPlayer.volume = 0.5;
 }
 
 if (videoContainer) {
