@@ -107,7 +107,7 @@ function init() {
   playButton.addEventListener("click", playHandler);
   volumeButton.addEventListener("click", muteHandler);
   fullScreenButton.addEventListener("click", doFullScreen);
-  videoPlayer.addEventListener("loadedmetadata", setTotalTime);
+  videoPlayer.addEventListener("loadeddata", setTotalTime);
   videoPlayer.addEventListener("timeupdate", setCurrentTime);
   videoPlayer.addEventListener("ended", videoEndHandler);
   volumeRange.addEventListener("input", volumeHandler);
