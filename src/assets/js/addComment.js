@@ -9,12 +9,14 @@ function increaseNumber() {
   commentNumber.innerHTML = parseInt(commentNumber.innerHTML, 10) + 1;
 }
 
-function addComment(comment, user) {
+function addComment(comment, videoId, { user, commentId }) {
   const li = document.createElement("li");
   const userAvatarAnchor = document.createElement("a");
   const userAvatarImg = document.createElement("img");
   const commentDiv = document.createElement("div");
+  const commentAuthorDiv = document.createElement("div");
   const commentAuthor = document.createElement("a");
+  const commentDeleteBtn = document.createElement("a");
   const commentText = document.createElement("span");
 
   userAvatarAnchor.classList.add("comment__user-avatar");
@@ -25,13 +27,21 @@ function addComment(comment, user) {
   userAvatarAnchor.appendChild(userAvatarImg);
 
   commentDiv.classList.add("comment");
+  commentAuthorDiv.classList.add("comment-author__container");
   commentAuthor.classList.add("comment-author");
   commentAuthor.href = routes.userDetail(user._id);
   commentAuthor.innerText = user.name;
+  commentDeleteBtn.classList.add("comment-delete-btn");
+  commentDeleteBtn.href = routes.deleteComment(videoId, commentId);
+  commentDeleteBtn.innerText = "삭제";
+
+  commentAuthorDiv.appendChild(commentAuthor);
+  commentAuthorDiv.appendChild(commentDeleteBtn);
+
   commentText.classList.add("comment-text");
   commentText.innerText = comment;
 
-  commentDiv.appendChild(commentAuthor);
+  commentDiv.appendChild(commentAuthorDiv);
   commentDiv.appendChild(commentText);
 
   li.appendChild(userAvatarAnchor);
@@ -51,7 +61,7 @@ async function sendComment(comment) {
     },
   });
   if (response.status === 200) {
-    addComment(comment, response.data);
+    addComment(comment, id, response.data);
   }
 }
 
