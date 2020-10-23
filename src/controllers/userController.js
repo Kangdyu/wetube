@@ -46,8 +46,6 @@ export const githubLoginCallback = async (_, __, profile, cb) => {
     const user = await User.findOne({ email }).populate("videos");
     if (user) {
       user.githubId = id;
-      user.avatarUrl = avatar_url;
-      user.name = name;
       user.save();
       return cb(null, user);
     }
