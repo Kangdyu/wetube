@@ -97,8 +97,13 @@
           display: flex;
           flex-direction: column;
 
-          .comment-author {
+          .comment-author__container {
             margin-bottom: 10px;
+
+            .comment-delete-btn {
+              color: red;
+              margin-left: 20px;
+            }
           }
         }
       }

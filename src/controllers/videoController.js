@@ -169,3 +169,21 @@ export const postAddComment = async (req, res) => {
     res.json(user);
   }
 };
+
+export const deleteComment = async (req, res) => {
+  const {
+    params: { vid, cid },
+  } = req;
+
+  try {
+    const video = await Video.findById(vid);
+    video.comments = video.comments.filter(
+      (item) => item._id.toString() !== cid
+    );
+    video.save();
+  } catch (error) {
+    console.log(error);
+  } finally {
+    res.redirect(routes.videoDetail(vid));
+  }
+};

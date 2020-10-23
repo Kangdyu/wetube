@@ -38,5 +38,8 @@ block content
             a.comment__user-avatar(href=routes.userDetail(comment.creator.id))
               img.user-avatar--small(src=comment.creator.avatarUrl)
             .comment
-              a.comment-author(href=routes.userDetail(comment.creator.id))=comment.creator.name
+              .comment-author__container
+                a.comment-author(href=routes.userDetail(comment.creator.id))=comment.creator.name
+                if loggedUser && loggedUser.id === comment.creator.id
+                  a.comment-delete-btn(href=routes.deleteComment(video.id, comment.id)) 삭제
               span.comment-text=comment.text
