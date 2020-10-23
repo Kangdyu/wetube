@@ -10,6 +10,7 @@ export const home = async (req, res) => {
     res.render("home", { pageTitle: "Home", videos });
   } catch (error) {
     console.log(error);
+    req.flash("error", "비디오를 불러오는 데 문제가 발생했습니다.");
     res.render("home", { pageTitle: "Home", videos: [] });
   }
 };
@@ -24,6 +25,7 @@ export const search = async (req, res) => {
       title: { $regex: searchingBy, $options: "i" },
     }).populate("creator");
   } catch (error) {
+    req.flash("error", "검색 결과를 불러오는 데 문제가 발생했습니다.");
     console.log(error);
   }
   res.render("search", { pageTitle: "Search", searchingBy, videos });
@@ -37,17 +39,23 @@ export const postUpload = async (req, res) => {
     body: { title, description },
     file: { location },
   } = req;
-  const newVideo = await Video.create({
-    fileUrl: location,
-    title,
-    description,
-    creator: req.user.id,
-  });
-  req.user.videos.push(newVideo.id);
-  req.user.save();
-  console.log(newVideo);
-  // TODO: upload and save video
-  res.redirect(routes.videoDetail(newVideo.id));
+
+  try {
+    const newVideo = await Video.create({
+      fileUrl: location,
+      title,
+      description,
+      creator: req.user.id,
+    });
+    req.user.videos.push(newVideo.id);
+    req.user.save();
+    req.flash("success", "비디오를 업로드하였습니다.");
+    res.redirect(routes.videoDetail(newVideo.id));
+  } catch (error) {
+    req.flash("error", "비디오를 업로드하는 데 문제가 발생했습니다.");
+    console.log(error);
+    res.redirect(routes.home);
+  }
 };
 
 export const videoDetail = async (req, res) => {
@@ -69,6 +77,7 @@ export const videoDetail = async (req, res) => {
     }
     res.render("videoDetail", { pageTitle: video.title, video, createdAt });
   } catch (error) {
+    req.flash("error", "비디오를 찾을 수 없습니다.");
     console.log(error);
     res.redirect(routes.home);
   }
@@ -85,6 +94,7 @@ export const getEditVideo = async (req, res) => {
     }
     res.render("editVideo", { pageTitle: `Edit ${video.title}`, video });
   } catch (error) {
+    req.flash("error", "비디오를 수정할 수 없습니다.");
     res.redirect(routes.home);
   }
 };
@@ -95,8 +105,10 @@ export const postEditVideo = async (req, res) => {
   } = req;
   try {
     await Video.findOneAndUpdate({ _id: id }, { title, description });
+    req.flash("success", "비디오 정보가 수정되었습니다.");
     res.redirect(routes.videoDetail(id));
   } catch (error) {
+    req.flash("error", "비디오를 수정할 수 없습니다.");
     res.redirect(routes.home);
   }
 };
@@ -124,9 +136,11 @@ export const deleteVideo = async (req, res) => {
       }
     );
     await Video.findOneAndRemove({ _id: id });
+    req.flash("success", "비디오를 삭제했습니다.");
+    res.redirect(routes.home);
   } catch (error) {
+    req.flash("error", "비디오를 삭제할 수 없습니다.");
     console.log(error);
-  } finally {
     res.redirect(routes.home);
   }
 };
@@ -182,7 +196,9 @@ export const deleteComment = async (req, res) => {
       (item) => item._id.toString() !== cid
     );
     video.save();
+    req.flash("success", "댓글을 삭제했습니다.");
   } catch (error) {
+    req.flash("error", "댓글을 삭제하는 데 문제가 발생했습니다.");
     console.log(error);
   } finally {
     res.redirect(routes.videoDetail(vid));

@@ -1,0 +1,39 @@
+@keyframes messageAnimation {
+  0% {
+    transform: translateY(-200px);
+  }
+  20% {
+    transform: translateY(0);
+  }
+  80% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-200px);
+  }
+}
+
+.message__container {
+  position: absolute;
+  z-index: 999;
+  top: 30px;
+  left: 35vw;
+  width: 30vw;
+  height: 40px;
+  box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  animation: messageAnimation 3s ease-in-out forwards;
+
+  &.error {
+    background-color: #e74c3c;
+  }
+  &.info {
+    background-color: #f1c40f;
+  }
+  &.success {
+    background-color: #2ecc71;
+  }
+}
