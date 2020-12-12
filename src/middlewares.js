@@ -15,6 +15,7 @@ const multerVideo = multer({
     acl: "public-read",
     bucket: "kangdyu-wetube/videos",
   }),
+  limits: { fileSize: 5 * 1024 * 1024 },
 });
 
 const multerAvatar = multer({
@@ -23,6 +24,7 @@ const multerAvatar = multer({
     acl: "public-read",
     bucket: "kangdyu-wetube/avatars",
   }),
+  limits: { fileSize: 5 * 1024 * 1024 },
 });
 
 export const uploadVideo = multerVideo.single("videoFile");
