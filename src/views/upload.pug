@@ -4,6 +4,7 @@ block content
   .form-container
     form(action=`/videos${routes.upload}`, method="post", enctype="multipart/form-data")
       h3.form__title Upload Your Video
+      span (Under 5MB)
       input(type="file", name="videoFile", accept="video/*" required=true)
       input(type="text", name="title", placeholder="Title", required=true)
       textarea(name="description", placeholder="Description", required=true)
